@@ -30,6 +30,7 @@ namespace MicroserviceNET.Platform
       var client = new HttpClient() { BaseAddress = uri };
       client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", response.AccessToken);
       client.DefaultRequestHeaders.Add("Correlation-Token", this.correlationToken);
+      client.DefaultRequestHeaders.Add("Accept", "application/json");
       if (!string.IsNullOrEmpty(this.idToken))
         client.DefaultRequestHeaders.Add("microservice.NET-end-user", this.idToken);
       return client;

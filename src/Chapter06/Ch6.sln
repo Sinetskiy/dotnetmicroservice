@@ -1,13 +1,13 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.26114.2
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoyaltyProgram", "LoyaltyProgram\LoyaltyProgram.csproj", "{1D060DFB-DFBC-4D6E-A8E0-56456F8CDF77}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoyaltyProgram", "LoyaltyProgram\LoyaltyProgram.csproj", "{4BED3C45-E8C3-4345-A08F-249A39A256EB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoyaltyProgramEventConsumer", "LoyaltyProgramEventConsumer\LoyaltyProgramEventConsumer.csproj", "{11A1C309-0C2B-49C0-BEC7-A8DB051DF011}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiGatewayMock", "ApiGatewayMock\ApiGatewayMock.csproj", "{FE109A02-BF1B-46FC-87C8-2A68781CE8A4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiGatewayMock", "ApiGatewayMock\ApiGatewayMock.csproj", "{038733CB-6544-40C0-8A64-6A1E0B0FA3CA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoyaltyProgramEventConsumer", "LoyaltyProgramEventConsumer\LoyaltyProgramEventConsumer.csproj", "{47349717-585A-43EE-96E8-7D5249CB431D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,22 +15,22 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4BED3C45-E8C3-4345-A08F-249A39A256EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4BED3C45-E8C3-4345-A08F-249A39A256EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4BED3C45-E8C3-4345-A08F-249A39A256EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4BED3C45-E8C3-4345-A08F-249A39A256EB}.Release|Any CPU.Build.0 = Release|Any CPU
 		{87C7C329-1824-4AC7-AF25-3D06068A01F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{87C7C329-1824-4AC7-AF25-3D06068A01F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{87C7C329-1824-4AC7-AF25-3D06068A01F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{87C7C329-1824-4AC7-AF25-3D06068A01F6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1D060DFB-DFBC-4D6E-A8E0-56456F8CDF77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1D060DFB-DFBC-4D6E-A8E0-56456F8CDF77}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1D060DFB-DFBC-4D6E-A8E0-56456F8CDF77}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1D060DFB-DFBC-4D6E-A8E0-56456F8CDF77}.Release|Any CPU.Build.0 = Release|Any CPU
-		{11A1C309-0C2B-49C0-BEC7-A8DB051DF011}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{11A1C309-0C2B-49C0-BEC7-A8DB051DF011}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{11A1C309-0C2B-49C0-BEC7-A8DB051DF011}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{11A1C309-0C2B-49C0-BEC7-A8DB051DF011}.Release|Any CPU.Build.0 = Release|Any CPU
-		{038733CB-6544-40C0-8A64-6A1E0B0FA3CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{038733CB-6544-40C0-8A64-6A1E0B0FA3CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{038733CB-6544-40C0-8A64-6A1E0B0FA3CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{038733CB-6544-40C0-8A64-6A1E0B0FA3CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE109A02-BF1B-46FC-87C8-2A68781CE8A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE109A02-BF1B-46FC-87C8-2A68781CE8A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE109A02-BF1B-46FC-87C8-2A68781CE8A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE109A02-BF1B-46FC-87C8-2A68781CE8A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47349717-585A-43EE-96E8-7D5249CB431D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47349717-585A-43EE-96E8-7D5249CB431D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47349717-585A-43EE-96E8-7D5249CB431D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47349717-585A-43EE-96E8-7D5249CB431D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

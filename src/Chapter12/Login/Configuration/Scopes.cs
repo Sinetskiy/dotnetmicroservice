@@ -5,19 +5,19 @@
 
   public class Scopes
   {
-    public static IEnumerable<Scope> Get() =>
-      new[]
-      {
-        // standard OpenID Connect scopes
-        StandardScopes.OpenId,
-        StandardScopes.ProfileAlwaysInclude,
-        StandardScopes.EmailAlwaysInclude,
-        new Scope
-        {
-          Name = "loyalty_program_write",
-          DisplayName = "Loyalty Program write access",
-          Type = ScopeType.Resource,
-        }
-      };
+//    public static IEnumerable<Scope> Get() =>
+//      new[]
+//      {
+//        // standard OpenID Connect scopes
+//        StandardScopes.OpenId,
+//        StandardScopes.ProfileAlwaysInclude,
+//        StandardScopes.EmailAlwaysInclude,
+//        new Scope
+//        {
+//          Name = "loyalty_program_write",
+//          DisplayName = "Loyalty Program write access",
+//          Type = ScopeType.Resource,
+//        }
+//      };
   }
 }

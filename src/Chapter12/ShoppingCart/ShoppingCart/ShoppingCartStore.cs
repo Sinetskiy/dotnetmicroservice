@@ -7,56 +7,63 @@
     using Dapper;
 
     public class ShoppingCartStore : IShoppingCartStore
-  {
-    private string connectionString =
-@"Data Source=.\SQLEXPRESS;Initial Catalog=ShoppingCart;
+    {
+        private string connectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog=ShoppingCart;
 Integrated Security=True";
 
-    private const string readItemsSql =
-@"select * from ShoppingCart, ShoppingCartItems
-where ShoppingCartItems.ShoppingCartId = ID
-and ShoppingCart.UserId=@UserId";
+        private const string readItemsSql = @"select sci.ProductCatalogId
+, ProductName
+, sci.ProductDescription
+, Amount
+, Currency  
+from ShoppingCart sc, ShoppingCartItems sci
+where sci.ShoppingCartId = sc.ID
+and sc.UserId=@UserId";
 
-    public async Task<ShoppingCart> Get(int userId)
-    {
-      using (var conn = new SqlConnection(connectionString))
-      {
-        var items = await
-          conn.QueryAsync<ShoppingCartItem>(
-            readItemsSql, 
-            new { UserId = userId });
-        return new ShoppingCart(userId, items);
-      }
-    }
+        public async Task<ShoppingCart> Get(int userId)
+        {
+            using (var conn = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    var items = await conn.QueryAsync<ShoppingCartItem>(readItemsSql, new { UserId = userId });
+                    return new ShoppingCart(userId, items);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
 
-      private const string deleteAllForShoppingCartSql=
- @"delete item from ShoppingCartItems item
+                return new ShoppingCart(userId, new List<ShoppingCartItem>());
+            }
+        }
+
+        private const string deleteAllForShoppingCartSql = @"delete item from ShoppingCartItems item
 inner join ShoppingCart cart on item.ShoppingCartId = cart.ID
 and cart.UserId=@UserId";
- 
-      private const string addAllForShoppingCartSql=
-@"insert into ShoppingCartItems 
-(ShoppingCartId, ProductCatalogId, ProductName, 
-ProductDescription, Amount, Currency)
+
+        private const string addAllForShoppingCartSql = @"insert into ShoppingCartItems 
+(ShoppingCartId, ProductCatalogId, ProductName, ProductDescription, Amount, Currency)
 values 
-(@ShoppingCartId, @ProductCatalogId, @ProductName,v
-@ProductDescription, @Amount, @Currency)";
+(5, @ProductCatalogId, @ProductName, @ProductDescription, @Amount, @Currency)";
 
-    public async Task Save(ShoppingCart shoppingCart)
-    {
-      using (var conn = new SqlConnection(connectionString))
-      using (var tx = conn.BeginTransaction())
-      {
-        await conn.ExecuteAsync(
-          deleteAllForShoppingCartSql,
-          new { UserId = shoppingCart.UserId },
-          tx).ConfigureAwait(false);
-        await conn.ExecuteAsync(
-          addAllForShoppingCartSql,
-          shoppingCart.Items,
-          tx).ConfigureAwait(false);
-      }
-    }
+        public async Task Save(ShoppingCart shoppingCart)
+        {
+            try
+            {
+                using (var conn = new SqlConnection(connectionString))
+              //  using (var tx = conn.BeginTransaction())
+                {
+                    await conn.ExecuteAsync(deleteAllForShoppingCartSql, new { UserId = shoppingCart.UserId })
+                        .ConfigureAwait(false);
+                    await conn.ExecuteAsync(addAllForShoppingCartSql, shoppingCart.Items).ConfigureAwait(false);
+                }
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
 
+        }
     }
 }

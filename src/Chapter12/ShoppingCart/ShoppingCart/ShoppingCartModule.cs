@@ -1,47 +1,67 @@
-﻿namespace ShoppingCart.ShoppingCart
+﻿using System.Linq;
+
+namespace ShoppingCart.ShoppingCart
 {
-  using EventFeed;
-  using Nancy;
-  using Nancy.ModelBinding;
+    using EventFeed;
+    using Nancy;
+    using Nancy.ModelBinding;
 
-  public class ShoppingCartModule : NancyModule
-  {
-    public ShoppingCartModule(
-      IShoppingCartStore shoppingCartStore,
-      IProductCatalogueClient productCatalogue,
-      IEventStore eventStore) 
-      : base("/shoppingcart")
+    public class ShoppingCartModule : NancyModule
     {
-      Get("/{userid:int}", parameters =>
-      {
-        var userId = (int) parameters.userid;
-        return shoppingCartStore.Get(userId);
-      });
+        public ShoppingCartModule(
+            IShoppingCartStore shoppingCartStore,
+            IProductCatalogueClient productCatalogue,
+            IEventStore eventStore)
+            : base("/shoppingcart")
+        {
+            Get("/{userid:int}", parameters =>
+            {
+                var userId = (int) parameters.userid;
+                return shoppingCartStore.Get(userId);
+            });
 
-      Post("/{userid:int}/items", async parameters =>
-      {
-        var productCatalogueIds = this.Bind<int[]>();
-        var userId = (int) parameters.userid;
+            Post("/{userid:int}/items", async parameters =>
+            {
+                var productCatalogueIds = this.Bind<int[]>();
+                var userId = (int) parameters.userid;
 
-        var shoppingCart = await shoppingCartStore.Get(userId).ConfigureAwait(false);
-        var shoppingCartItems = await productCatalogue.GetShoppingCartItems(productCatalogueIds).ConfigureAwait(false);
-        shoppingCart.AddItems(shoppingCartItems, eventStore);
-        await shoppingCartStore.Save(shoppingCart);
+                var shoppingCart = await shoppingCartStore.Get(userId).ConfigureAwait(false);
+                var shoppingCartItems =
+                    await productCatalogue.GetShoppingCartItems(productCatalogueIds).ConfigureAwait(false);
 
-        return shoppingCart;
-      });
+//                var shoppingCartId = 1;
+//                var cartItemsList = shoppingCart.Items.ToList();
+//                if (cartItemsList.Any())
+//                {
+//                    shoppingCartId = cartItemsList[0].ShoppingCartId;
+//                }
+//
+//                shoppingCartItems = shoppingCartItems.Select(p => new ShoppingCartItem(
+//                    shoppingCartId,
+//                    p.ProductCatalogId,
+//                    p.ProductName,
+//                    p.ProductDescription,
+//                    p.Amount,
+//                    p.Currency
+//                ));
 
-      Delete("/{userid:int}/items", async parameters =>
-      {
-        var productCatalogueIds = this.Bind<int[]>();
-        var userId = (int)parameters.userid;
+                shoppingCart.AddItems(shoppingCartItems, eventStore);
+                await shoppingCartStore.Save(shoppingCart);
 
-        var shoppingCart = await shoppingCartStore.Get(userId).ConfigureAwait(false);
-        shoppingCart.RemoveItems(productCatalogueIds, eventStore);
-        await shoppingCartStore.Save(shoppingCart);
+                return shoppingCart;
+            });
 
-        return shoppingCart;
-      });
+            Delete("/{userid:int}/items", async parameters =>
+            {
+                var productCatalogueIds = this.Bind<int[]>();
+                var userId = (int) parameters.userid;
+
+                var shoppingCart = await shoppingCartStore.Get(userId).ConfigureAwait(false);
+                shoppingCart.RemoveItems(productCatalogueIds, eventStore);
+                await shoppingCartStore.Save(shoppingCart);
+
+                return shoppingCart;
+            });
+        }
     }
-  }
 }

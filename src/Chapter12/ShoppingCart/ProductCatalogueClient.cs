@@ -83,10 +83,11 @@
       return
         products
           .Select(p => new ShoppingCartItem(
-            int.Parse(p.ProductId),
-            p.ProductName,
-            p.ProductDescription,
-            p.Price
+                int.Parse(p.ProductId),
+                p.ProductName,
+                p.ProductDescription,
+                p.Price.Amount,
+                p.Price.Currency
         ));
     }
 
